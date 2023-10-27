@@ -1,27 +1,21 @@
-let distance = prompt('Inserisci la distanza che devi percorrere')
-let age = prompt('Inserisci la tua età')
+let distance = parseFloat(prompt('Inserisci la distanza che devi percorrere'));
+let age = parseInt(prompt('Inserisci la tua età'));
 
-const priceOneKilometer = 0.21
+const priceOneKilometer = 0.21;
+let priceKilometer = distance * priceOneKilometer;
 
-let priceKilometer = distance * priceOneKilometer
+const under18sale = priceKilometer * 0.20; 
+const over65sale = priceKilometer * 0.40; 
 
-const under18sale = priceOneKilometer * 20 / 100
-console.log(under18sale);
-
-const over65sale = priceOneKilometer * 40 / 100
-console.log(over65sale);
-
-
-
-const totalPrice = document.getElementById('prezzo').innerHTML = `<h3>Spenderai ${priceKilometer}</h3>`
-const salePrice = document.getElementById('prezzoScontato')
-
+const totalPrice = document.getElementById('prezzo');
+const salePrice = document.getElementById('prezzoScontato');
 
 if (age < 18) {
-    salePrice.innerHTML = `<h3>Spenderai ${under18sale.toFixed(2)}</h3>`
-} else if (age >= 18 && age < 65){
-    totalPrice.innerHTML = `<h3>Spenderai ${priceKilometer.toFixed(2)}</h3>`
-} else {
-    salePrice.innerHTML = `<h3>Spenderai ${over65sale.toFixed(2)}</h3>`
+    totalPrice.textContent = `Spenderai ${priceKilometer} (senza sconto)`;
+    salePrice.textContent = `Spenderai ${(priceKilometer - under18sale).toFixed(2)} (con sconto del 20%)`;
+} else if (age >= 18 && age < 65) {
+    totalPrice.textContent = `Spenderai ${priceKilometer}`;
+} else if (age >= 65) {
+    totalPrice.textContent = `Spenderai ${priceKilometer} (senza sconto)`;
+    salePrice.textContent = `Spenderai ${(priceKilometer - over65sale).toFixed(2)} (con sconto del 40%)`;
 }
-
